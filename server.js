@@ -29,15 +29,14 @@ app.get("/notes", (req, res) => {
 
 // API routes
 app.get("/api/notes", (req, res) => {
-    // Should read the `db.json` file and return all saved notes as JSON.
+    // read the `db.json` file and return all saved notes as JSON.
     let rawData = fs.readFileSync(__dirname + '/db/db.json');
     let data = JSON.parse(rawData);
     return res.json(data);
   });
 app.post("/api/notes", (req, res) => {
-    // Should receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
+    // receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
     const body = req.body;
-    console.log(req.body);
     let data = JSON.parse(fs.readFileSync(__dirname + '/db/db.json'));
     let id =  {id: data.length + 1};
     let note = {
@@ -46,7 +45,6 @@ app.post("/api/notes", (req, res) => {
     }
     data.push(note);
     fs.writeFileSync(__dirname + '/db/db.json', JSON.stringify(data)); 
-    console.log(data);
     return res.json(data);
   });
 app.delete("/api/notes:id", (req, res) => {
