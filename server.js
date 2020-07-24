@@ -13,6 +13,10 @@ const PORT = process.env.PORT || 3000;
 const readFileAsync = util.promisify(fs.readFile);
 app.use(express.static("public"));
 
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", (req, res) => {
@@ -32,6 +36,18 @@ app.get("/api/notes", (req, res) => {
   });
 app.post("/api/notes", (req, res) => {
     // Should receive a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
+    const body = req.body;
+    console.log(req.body);
+    let data = JSON.parse(fs.readFileSync(__dirname + '/db/db.json'));
+    let id =  {id: data.length + 1};
+    let note = {
+      ...id,
+      ...body
+    }
+    data.push(note);
+    fs.writeFileSync(__dirname + '/db/db.json', JSON.stringify(data)); 
+    console.log(data);
+    return res.json(data);
   });
 app.delete("/api/notes:id", (req, res) => {
     // Should receive a query parameter containing the id of a note to delete.
