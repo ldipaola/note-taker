@@ -10,7 +10,6 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const readFileAsync = util.promisify(fs.readFile);
 app.use(express.static("public"));
 
 // Sets up the Express app to handle data parsing
@@ -47,8 +46,13 @@ app.post("/api/notes", (req, res) => {
     fs.writeFileSync(__dirname + '/db/db.json', JSON.stringify(data)); 
     return res.json(data);
   });
-app.delete("/api/notes:id", (req, res) => {
+app.delete("/api/notes/:id", (req, res) => {
     // Should receive a query parameter containing the id of a note to delete.
+    const deleteNoteId = parseInt(req.params.id);
+    const data = JSON.parse(fs.readFileSync(__dirname + '/db/db.json'));
+    const newData = data.filter(notes => notes.id !== deleteNoteId);
+    fs.writeFileSync(__dirname + '/db/db.json', JSON.stringify(newData)); 
+    return res.json("Deleted");
   });
 
 
