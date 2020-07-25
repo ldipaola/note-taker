@@ -30,7 +30,7 @@
   MIT
 
   ## Contributing
-  Nogit status
+  No
 
   ## Questions
   Github: ldipaola
