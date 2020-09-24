@@ -10,7 +10,8 @@
 
   ## Table of Contents  
   [Installation](#Installation)  
-  [Demo](#Demo)  
+  [Demo](#Demo) 
+  [Deployment](#Deployment)
   [License](#License)  
   [Contributing](#Contributing)   
   [Questions](#Questions)  
@@ -19,12 +20,13 @@
 
 
   ## Installation
-  Download 
-  Run: npm i 
-  Run: npm start 
+  npm install
   
   ## Demo
   ![app demo](./project.png)
+  
+  ## Deployment 
+  https://shrouded-reaches-20476.herokuapp.com/
 
   ## License
   MIT
@@ -33,5 +35,5 @@
   No
 
   ## Questions
-  Github: ldipaola
-  Email: ldipaola66@gmail.com
+  - Github: ldipaola
+  - Email: ldipaola66@gmail.com
